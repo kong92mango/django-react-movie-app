@@ -15,9 +15,7 @@ const Listings = (props) => {
       itemLayout="vertical"
       size="large"
       pagination={{
-        onChange: (page) => {
-          console.log(page);
-        },
+        onChange: (page) => {},
         pageSize: 3,
       }}
       dataSource={props.data}
@@ -32,7 +30,7 @@ const Listings = (props) => {
             />,
             <IconText
               icon={LikeOutlined}
-              text="156"
+              text="15"
               key="list-vertical-like-o"
             />,
             <IconText
@@ -52,8 +50,19 @@ const Listings = (props) => {
           <List.Item.Meta
             avatar={<Avatar src={item.avatar} />}
             title={<a href={`/${item.id}`}>{item.title}</a>}
-            description={item.description}
+            description={item.genre.map((type) => (
+              <a>{type.name} </a>
+            ))}
           />
+          {"Showings: "}
+          <ul>
+            {item.schedule.map((showtime) => (
+              <li key={showtime.id}>
+                {showtime.day.charAt(0).toUpperCase() + showtime.day.slice(1)}{" "}
+                at {showtime.time}
+              </li>
+            ))}
+          </ul>
         </List.Item>
       )}
     />

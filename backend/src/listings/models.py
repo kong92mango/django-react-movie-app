@@ -11,22 +11,10 @@ DAY_CHOICES = (
     ('sunday','Sunday'),
 )
 
-GENRE_CHOICES = (
-    ('action','ACTION'),
-    ('adventure', 'ADVENTURE'),
-    ('comedy','COMEDY'),
-    ('crime','CRIME'),
-    ('drama','DRAMA'),
-    ('fantasy','FANTASY'),
-    ('horror','HORROR'),
-    ('mystery','MYSTERY'),
-    ('science','SCIENCE'),
-)
-
 class Listing(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField()
-    genre = forms.MultipleChoiceField(choices=GENRE_CHOICES, widget=forms.CheckboxSelectMultiple())
+    genre = models.ManyToManyField('Genre')
     schedule = models.ManyToManyField('Schedule')
 
     def __str__(self):
@@ -37,4 +25,10 @@ class Schedule(models.Model):
     time = models.TimeField(blank=True)
 
     def __str__(self):
-        return self.day + str(self.time)
+        return self.day + "@" + str(self.time)
+
+class Genre(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name

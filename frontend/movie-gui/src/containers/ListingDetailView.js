@@ -14,13 +14,14 @@ class ListingDetail extends React.Component {
       this.setState({
         listing: res.data,
       });
+      console.log(res.data);
     });
   }
 
   render() {
     return (
       <Card title={this.state.listing.title}>
-        <p>{this.state.listing.title}</p>
+        <p>{this.state.listing.description}</p>
       </Card>
     );
   }
