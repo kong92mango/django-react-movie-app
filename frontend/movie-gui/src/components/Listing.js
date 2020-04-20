@@ -15,7 +15,7 @@ const Listings = (props) => {
       itemLayout="vertical"
       size="large"
       pagination={{
-        onChange: (page) => {},
+        onChange: () => {},
         pageSize: 3,
       }}
       dataSource={props.data}
@@ -40,19 +40,22 @@ const Listings = (props) => {
             />,
           ]}
           extra={
-            <img
-              width={272}
-              alt="logo"
-              src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
-            />
+            <a href={`/${item.id}`}>
+              <img
+                width={200}
+                height={200}
+                alt="logo"
+                src="https://cdn4.iconfinder.com/data/icons/map-glyph/48/cinema-512.png"
+              />
+            </a>
           }
         >
           <List.Item.Meta
-            avatar={<Avatar src={item.avatar} />}
+            avatar={
+              <Avatar src="https://image.flaticon.com/icons/svg/25/25297.svg" />
+            }
             title={<a href={`/${item.id}`}>{item.title}</a>}
-            description={item.genre.map((type) => (
-              <a>{type.name} </a>
-            ))}
+            description={item.genre.map((type) => type.name).join(", ")}
           />
           {"Showings: "}
           <ul>

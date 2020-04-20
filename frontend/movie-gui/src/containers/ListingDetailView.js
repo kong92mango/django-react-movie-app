@@ -14,14 +14,37 @@ class ListingDetail extends React.Component {
       this.setState({
         listing: res.data,
       });
-      console.log(res.data);
     });
   }
 
   render() {
     return (
       <Card title={this.state.listing.title}>
-        <p>{this.state.listing.description}</p>
+        <p>
+          {"Genres: "}
+          <br />
+          {this.state.listing.genre &&
+            this.state.listing.genre.map((type) => type.name).join(", ")}
+        </p>
+        <br />
+        <p>
+          {"Summary: "}
+          <br />
+          {this.state.listing.description}
+        </p>
+        <br />
+        <p>
+          {"Showings: "}
+          <ul>
+            {this.state.listing.schedule &&
+              this.state.listing.schedule.map((showtime) => (
+                <li key={showtime.id}>
+                  {showtime.day.charAt(0).toUpperCase() + showtime.day.slice(1)}{" "}
+                  at {showtime.time}
+                </li>
+              ))}
+          </ul>
+        </p>
       </Card>
     );
   }
